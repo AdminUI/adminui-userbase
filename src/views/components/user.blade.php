@@ -16,6 +16,7 @@ $routes = [
 ];
 @endphp
 
+{{-- Render the vue js mini app --}}
 <x-ecom.layout.main>
     <vue-user-account-app :routes=@json($routes) site-name="{{ config('app.name') }}}" primary="var(--primary)"
         secondary="var(--secondary)">

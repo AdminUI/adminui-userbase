@@ -1,14 +1,14 @@
 {
     "name": "adminui/adminui-userbase",
-    "description": "Add STuff Here",
+    "description": "Adminui Front User login base , this package comes with basic fuction.",
     "keywords": [
         "laravel"
     ],
     "type": "laravel",
-    "license": "MIT",
+    "license": "Private",
     "authors": [
         {
-            "name": "mario",
+            "name": "mario tarosso",
             "email": "mariojgt2@gmail.com"
         }
     ],

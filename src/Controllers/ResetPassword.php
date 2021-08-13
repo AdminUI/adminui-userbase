@@ -11,11 +11,12 @@ use Illuminate\Auth\Events\PasswordReset;
 
 class ResetPassword extends Controller
 {
-    public function index()
-    {
-        return view('content.ecom.auth.forgot');
-    }
-
+    /**
+     * Handle the request to reset user password
+     * @param Request $request
+     *
+     * @return [type]
+     */
     public function reset(Request $request)
     {
         $request->validate(['email' => 'required|email']);
@@ -36,6 +37,13 @@ class ResetPassword extends Controller
         return redirect('/user/account/reset-password/' . $token . '?email=' . $email);
     }
 
+    /**
+     * Change the user password
+     *
+     * @param Request $request
+     *
+     * @return [type]
+     */
     public function passwordChange(Request $request)
     {
         $request->validate([

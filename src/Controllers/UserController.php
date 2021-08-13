@@ -8,6 +8,11 @@ use AdminUI\AdminUIAdmin\Models\Country;
 
 class UserController extends Controller
 {
+    /**
+     * Display the user mini app
+     *
+     * @return [type]
+     */
     public function index()
     {
         $country = Country::all();

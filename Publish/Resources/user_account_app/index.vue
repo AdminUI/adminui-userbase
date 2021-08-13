@@ -4,7 +4,7 @@
             <div class="col-3 pr-2">
                 <dsm-treeview
                     :class="{
-                        'is-disabled': !isAuth
+                        'is-disabled': !isAuth,
                     }"
                     :items="sidebarOptions"
                     highlight-colour="var(--max-red)"
@@ -31,32 +31,32 @@ import { computed, provide } from "vue";
 const props = defineProps({
     routes: {
         type: Object,
-        default: () => ({})
+        default: () => ({}),
     },
     siteName: String,
     primary: {
         type: String,
-        default: "steelblue"
+        default: "steelblue",
     },
     secondary: {
         type: String,
-        default: "darkgray"
-    }
-})
+        default: "darkgray",
+    },
+});
 
-provide('routes', props.routes);
-provide('site-name', props.siteName);
-provide('colours', {
+provide("routes", props.routes);
+provide("site-name", props.siteName);
+provide("colours", {
     primary: props.primary,
-    secondary: props.secondary
-})
+    secondary: props.secondary,
+});
 
 const snackbar = useSnackbar();
 const router = useRouter();
 
 const isAuth = computed(() => {
     return !!user.value && !!user.value.email;
-})
+});
 
 /**
  * @constant {string} currentRoute - Name of the current Vue Router route
@@ -70,25 +70,24 @@ const controller = (item) => {
     if (item.command) item.command();
     else if (item.route) {
         router.push({
-            name: item.route
-        })
+            name: item.route,
+        });
     }
-}
+};
 
 const logout = () => {
-    api.get('/user/logout')
-        .then(res => {
-            if (res.data.status === true) {
-                snackbar.add({
-                    type: 'success',
-                    text: 'You are now logged out. Redirecting...'
-                })
-                setTimeout(() => {
-                    window.location.href = "/";
-                }, 2000)
-            }
-        })
-}
+    api.get("/user/logout").then((res) => {
+        if (res.data.status === true) {
+            snackbar.add({
+                type: "success",
+                text: "You are now logged out. Redirecting...",
+            });
+            setTimeout(() => {
+                window.location.href = "/";
+            }, 2000);
+        }
+    });
+};
 
 /**
  * @computed {array} sidebarOptions - Create the User Account sidebar menu from the Vue Router routes.
@@ -101,38 +100,40 @@ const sidebarOptions = computed(() => {
     let index = 1;
 
     // Filter out non-menu routes and then add the route to the options array
-    routes.filter(r => r.meta.menu !== false).forEach(r => {
-        // Add the route to the menu
-        options.push({
-            id: index,
-            label: `<div 
+    routes
+        .filter((r) => r.meta.menu !== false)
+        .forEach((r) => {
+            // Add the route to the menu
+            options.push({
+                id: index,
+                label: `<div
                         class='
-                            dsm__treeview--top-level-menu 
+                            dsm__treeview--top-level-menu
                             ${currentRoute.value === r.name ? "active" : ""}
                             '
                     >
                         <i class='mdi mdi-sm mdi-${r.meta.icon} mr-2'></i>
                         ${r.meta.title}
                     </div>`,
-            route: r.name
+                route: r.name,
+            });
+            // If the route has a divider, add this to the array
+            if (r.meta.divider) {
+                options.push({ divider: true });
+            }
+            // Increment the index for the next route
+            index++;
         });
-        // If the route has a divider, add this to the array
-        if (r.meta.divider) {
-            options.push({ divider: true });
-        }
-        // Increment the index for the next route
-        index++;
-    });
     // Add a divider to go before the logout option
     options.push({ divider: true });
     // Add the logout option
     options.push({
         id: index,
         label: `<div class='dsm__treeview--top-level-menu'><i class='mdi mdi-sm mdi-login mr-2'></i>Logout</div>`,
-        route: "logout"
-    })
+        route: "logout",
+    });
     return options;
-})
+});
 </script>
 
 <style lang="scss">

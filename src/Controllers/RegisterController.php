@@ -15,12 +15,13 @@ use AdminUI\AdminUIAccounts\Models\Address;
 
 class RegisterController extends Controller
 {
-
-    public function index()
-    {
-        return view('content.ecom.auth.register');
-    }
-
+    /**
+     * Register the user in the system and create a account
+     *
+     * @param Request $request
+     *
+     * @return [type]
+     */
     public function userRegister(Request $request)
     {
         $request->validate([

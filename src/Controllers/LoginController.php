@@ -14,40 +14,13 @@ use Illuminate\Support\Facades\Redirect;
 
 class LoginController extends Controller
 {
-    public function index()
-    {
-        return view('content.ecom.auth.login');
-    }
-
-    public function register()
-    {
-        return view('content.ecom.auth.register');
-    }
-
-    public function userRegister(Request $request)
-    {
-        // Validate the user
-        $request->validate([
-            'name'     => ['required', 'string', 'max:255'],
-            'email'    => ['required', 'string', 'email', 'max:255', 'unique:users'],
-            'password' => ['required', 'string', 'min:8', 'confirmed'],
-        ]);
-
-        $user           = new User();
-        $user->name     = Request('name');
-        $user->email    = Request('email');
-        $user->password = Hash::make(Request('password'));
-        $user->save();
-
-        // Send the verification to the user
-        event(new Registered($user));
-
-        return json_encode([
-            'status'  => true,
-            'message' => 'success, please verify email',
-        ]);
-    }
-
+    /**
+     * Try login the user
+     *
+     * @param Request $request
+     *
+     * @return [type]
+     */
     public function login(Request $request)
     {
         // Validate the user
@@ -73,6 +46,13 @@ class LoginController extends Controller
         }
     }
 
+    /**
+     * Log out the user
+     *
+     * @param Request $request
+     *
+     * @return [type]
+     */
     public function logout(Request $request)
     {
         Auth::logout();
