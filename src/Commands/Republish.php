@@ -12,7 +12,7 @@ class Republish extends Command
      *
      * @var string
      */
-    protected $signature = 'republish:admin';
+    protected $signature = 'republish:userbase';
 
     /**
      * The console command description.
