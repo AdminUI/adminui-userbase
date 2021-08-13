@@ -3,6 +3,7 @@
 namespace AdminUI\AdminUIUserBase;
 
 use Illuminate\Support\ServiceProvider;
+use AdminUI\AdminUIUserBase\Commands\Republish;
 
 class AdminUIUserBaseProvider extends ServiceProvider
 {
@@ -18,6 +19,13 @@ class AdminUIUserBaseProvider extends ServiceProvider
 
         // Load user_base routes
         $this->loadRoutesFrom(__DIR__ . '/Routes/web.php');
+
+        // Load Commands
+        if ($this->app->runningInConsole()) {
+            $this->commands([
+                Republish::class
+            ]);
+        }
     }
 
     /**
