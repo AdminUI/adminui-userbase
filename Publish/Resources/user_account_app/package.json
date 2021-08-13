@@ -1,0 +1,23 @@
+{
+  "name": "user_account_app",
+  "private": true,
+  "version": "1.0.0",
+  "description": "AdminUI User Account Frontend Application (Vue 3)",
+  "main": "index.vue",
+  "peerDependencies": {
+    "@dsmdesign/vue3-input-text": "^1.0.1",
+    "@mdi/js": "^5.9.55",
+    "vue3-icon": "^2.0.0",
+    "vue-router": "^4.0.10",
+    "vue": "^3.0.5"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "app",
+    "user"
+  ],
+  "author": "DSM Design Ltd",
+  "license": "ISC"
+}

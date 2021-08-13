@@ -1,0 +1,39 @@
+{
+    "name": "adminui/adminui-userbase",
+    "description": "Add STuff Here",
+    "keywords": [
+        "laravel"
+    ],
+    "type": "laravel",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "mario",
+            "email": "mariojgt2@gmail.com"
+        }
+    ],
+    "require":{
+        "php": "^7.3|^8.0"
+    },
+    "autoload": {
+        "psr-4": {
+            "AdminUI\\AdminUIUserBase\\": "src"
+        }
+    },
+
+    "scripts": {
+        "post-autoload-dump": [
+            "@php artisan route:list"
+        ]
+    },
+
+    "extra": {
+        "laravel": {
+            "providers": [
+                "AdminUI\\AdminUIUserBase\\AdminUIUserBaseProvider"
+            ]
+        }
+    },
+    "minimum-stability": "dev",
+    "prefer-stable": true
+}
