@@ -13,6 +13,7 @@ use AdminUI\AdminUIEcommerce\Models\Product;
 use AdminUI\AdminUIEcommerce\Models\Wishlist;
 use AdminUI\AdminUIAdmin\Traits\ApiResponseTrait;
 use AdminUI\AdminUIEcommerce\Models\ProductReview;
+use AdminUI\AdminUIUserBase\Resources\OrderResource;
 use AdminUI\AdminUIUserBase\Resources\ProductReviewResource;
 use AdminUI\AdminUIUserBase\Resources\ProductResourceWishList;
 
@@ -213,7 +214,9 @@ class UserApiController extends Controller
     {
         $pagination = Request('pagination') ?? 10;
         $orderBy    = Request('orderBy') ?? 1;
-        return Auth()->user()->order()->paginate($pagination);
+        $order      = Auth()->user()->order()->paginate($pagination);
+
+        return OrderResource::collection($order);
     }
 
     //🔔🔔🔔🔔🔔🔔🔔🔔🔔🔔🔔🔔NOTIFICATIONS🔔🔔🔔🔔🔔🔔🔔🔔🔔🔔🔔🔔🔔🔔🔔🔔🔔🔔🔔🔔🔔🔔🔔🔔🔔🔔🔔🔔🔔🔔
