@@ -2,23 +2,27 @@
 
 namespace AdminUI\AdminUIUserBase;
 
-use Illuminate\Support\ServiceProvider;
+use AdminUI\AdminUIFramework\Provider;
 use AdminUI\AdminUIUserBase\Commands\Republish;
 
-class AdminUIUserBaseProvider extends ServiceProvider
+class AdminUIUserBaseProvider extends Provider
 {
+    public $viewPrefix = 'auiuserbase';
+    public $dir        = __DIR__;
+    public $namespace  = __NAMESPACE__;
+
     /**
      * Bootstrap the application services.
      *
      * @return void
      */
-    public function boot()
+    public function _boot()
     {
-        // Load user_base views
-        $this->loadViewsFrom(__DIR__ . '/views', 'userbase');
+        // // Load user_base views
+        // $this->loadViewsFrom(__DIR__ . '/views', 'userbase');
 
-        // Load user_base routes
-        $this->loadRoutesFrom(__DIR__ . '/Routes/web.php');
+        // // Load user_base routes
+        // $this->loadRoutesFrom(__DIR__ . '/Routes/web.php');
 
         // Load Commands
         if ($this->app->runningInConsole()) {
@@ -33,7 +37,7 @@ class AdminUIUserBaseProvider extends ServiceProvider
      *
      * @return void
      */
-    public function register()
+    public function _register()
     {
         $this->publish();
     }
