@@ -213,10 +213,14 @@ class UserApiController extends Controller
     public function getUserOrders()
     {
         $pagination = Request('pagination') ?? 10;
-        $orderBy    = Request('orderBy') ?? 1;
-        $order      = Auth()->user()->order()->paginate($pagination);
+        $orderBy    = Request('orderBy') ?? 'created_at';
+        $order      = Request('order') ?? 'desc';
 
-        return OrderResource::collection($order);
+        $orders   = Auth()->user()->order()
+            ->orderBy($orderBy, $order)
+            ->paginate($pagination);
+
+        return OrderResource::collection($orders);
     }
 
     //🔔🔔🔔🔔🔔🔔🔔🔔🔔🔔🔔🔔NOTIFICATIONS🔔🔔🔔🔔🔔🔔🔔🔔🔔🔔🔔🔔🔔🔔🔔🔔🔔🔔🔔🔔🔔🔔🔔🔔🔔🔔🔔🔔🔔🔔

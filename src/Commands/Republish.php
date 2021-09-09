@@ -3,7 +3,7 @@
 namespace AdminUI\AdminUIUserBase\Commands;
 
 use Illuminate\Console\Command;
-use File;
+use Illuminate\Support\Facades\File;
 
 class Republish extends Command
 {
