@@ -58,6 +58,7 @@ class OrderResource extends JsonResource
             "paid_at"              => $this->paid_at,
             "sent_at"              => $this->sent_at,
             "order_status_id"      => $this->order_status_id,
+            "order_status"         => optional($this->orderStatus)->name,
             "payment_type"         => $this->payment_type,
             "payment_code"         => $this->payment_code,
             "created_at"           => $this->created_at,
