@@ -3,7 +3,7 @@ import additionalRoutes from "../../user_account_app_extras/additionalRoutes";
 export default [
   {
     path: "/user/account/account-details",
-    component: () => import("../Pages/Details"),
+    component: () => import(/*webpackChunkName: "user_account_app/pages/details" */"../Pages/Details"),
     name: "details",
     meta: {
       title: "Account Details",
@@ -12,7 +12,7 @@ export default [
   },
   {
     path: "/user/account/addresses",
-    component: () => import("../Pages/Addresses"),
+    component: () => import(/*webpackChunkName: "user_account_app/pages/addresses" */"../Pages/Addresses"),
     name: "addresses",
     meta: {
       title: "My Addresses",
@@ -21,7 +21,7 @@ export default [
   },
   {
     path: "/user/account/order-history",
-    component: () => import("../Pages/OrderHistory"),
+    component: () => import(/*webpackChunkName: "user_account_app/pages/order-history" */"../Pages/OrderHistory"),
     name: "history",
     meta: {
       title: "Order History",
@@ -29,8 +29,17 @@ export default [
     },
   },
   {
+    path: "/user/account/product-reviews",
+    component: () => import(/*webpackChunkName: "user_account_app/pages/product-reviews" */"../Pages/ProductReviews"),
+    name: "reviews",
+    meta: {
+      title: "Product Reviews",
+      icon: "star",
+    },
+  },
+  {
     path: "/user/account",
-    component: () => import("../Pages/Notifications"),
+    component: () => import(/*webpackChunkName: "user_account_app/pages/notifications" */"../Pages/Notifications"),
     name: "notifications",
     meta: {
       title: "Notifications",
@@ -39,7 +48,7 @@ export default [
   },
   {
     path: "/user/account/returns",
-    component: () => import("../Pages/Returns"),
+    component: () => import(/*webpackChunkName: "user_account_app/pages/returns" */"../Pages/Returns"),
     name: "returns",
     meta: {
       title: "Returns",
@@ -48,7 +57,7 @@ export default [
   },
   {
     path: "/user/account/wishlist",
-    component: () => import("../Pages/Wishlist"),
+    component: () => import(/*webpackChunkName: "user_account_app/pages/wishlist" */"../Pages/Wishlist"),
     name: "wishlist",
     meta: {
       title: "Wishlist",
@@ -58,7 +67,7 @@ export default [
   ...additionalRoutes,
   {
     path: "/user/account/login",
-    component: () => import("../Pages/Account/Login"),
+    component: () => import(/*webpackChunkName: "user_account_app/pages/account/login" */"../Pages/Account/Login"),
     name: "login",
     meta: {
       title: "Login",
@@ -69,7 +78,7 @@ export default [
   },
   {
     path: "/user/account/email-verified",
-    component: () => import("../Pages/Account/EmailVerified"),
+    component: () => import(/*webpackChunkName: "user_account_app/pages/account/email-verified" */"../Pages/Account/EmailVerified"),
     name: "email-verified",
     meta: {
       title: "Email Address Verified",
@@ -80,7 +89,7 @@ export default [
   },
   {
     path: "/user/account/forgot-password",
-    component: () => import("../Pages/Account/ForgotPassword"),
+    component: () => import(/*webpackChunkName: "user_account_app/pages/account/forgot-password" */"../Pages/Account/ForgotPassword"),
     name: "forgot-password",
     meta: {
       title: "Forgot Password",
@@ -91,7 +100,7 @@ export default [
   },
   {
     path: "/user/account/reset-password/:token",
-    component: () => import("../Pages/Account/ResetPassword"),
+    component: () => import(/*webpackChunkName: "user_account_app/pages/account/reset-password" */"../Pages/Account/ResetPassword"),
     name: "reset-password",
     meta: {
       title: "Reset Password",
@@ -102,7 +111,7 @@ export default [
   },
   {
     path: "/user/account/logout",
-    component: () => import("../Pages/Account/Logout"),
+    component: () => import(/*webpackChunkName: "user_account_app/pages/account/logout" */"../Pages/Account/Logout"),
     name: "logout",
     meta: {
       title: "Logging Out",
@@ -113,7 +122,7 @@ export default [
   },
   {
     path: "/user/account/register",
-    component: () => import("../Pages/Account/Register"),
+    component: () => import(/*webpackChunkName: "user_account_app/pages/account/register" */"../Pages/Account/Register"),
     name: "register",
     meta: {
       title: "Register for an Account",
@@ -125,7 +134,7 @@ export default [
   {
     path: "/:pathMatch(.*)*",
     name: "404",
-    component: () => import("../Pages/404"),
+    component: () => import(/*webpackChunkName: "user_account_app/pages/404" */"../Pages/404"),
     meta: {
       menu: false,
     },

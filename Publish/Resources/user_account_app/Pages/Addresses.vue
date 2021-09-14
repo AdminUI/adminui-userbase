@@ -16,12 +16,9 @@
 
                     <template #footer>
                         <div class="text-centre mt-4 mb-2">
-                            <vue-button
-                                tile
-                                :background="colours.secondary"
-                                @click="createNewAddress"
-                                :dark="false"
-                            >Create New Address</vue-button>
+                            <vue-button tile :background="colours.secondary" @click="createNewAddress" :dark="false"
+                                >Create New Address</vue-button
+                            >
                         </div>
                     </template>
                 </Listbox>
@@ -31,9 +28,11 @@
                     <h5
                         class="text-centre mb-2 text-uppercase"
                         :style="{
-                            color: colours.primary
+                            color: colours.primary,
                         }"
-                    >{{ selectedAddress ? selectedAddressObject?.nickname : 'Select An Address' }}</h5>
+                    >
+                        {{ selectedAddress ? selectedAddressObject?.nickname : "Select An Address" }}
+                    </h5>
                     <vue-slide-up-down responsive :modelValue="true">
                         <table v-if="selectedAddress" :key="selectedAddress">
                             <tbody>
@@ -70,7 +69,10 @@
                     </vue-slide-up-down>
                     <div class="d-flex justify-content-between mt-4 mb-2">
                         <div
-                            v-tooltip.bottom="addresses.length <= 1 ? 'You cannot delete your only address' : null"
+                            v-tooltip.bottom="{
+                                value: 'You cannot delete your only address',
+                                disabled: !addresses || addresses.length > 1,
+                            }"
                         >
                             <vue-button
                                 text
@@ -78,7 +80,8 @@
                                 @click="showConfirmDeleteModal = true"
                                 :dark="false"
                                 :disabled="!selectedAddress || addresses.length <= 1"
-                            >Delete Address</vue-button>
+                                >Delete Address</vue-button
+                            >
                         </div>
                         <vue-button
                             tile
@@ -86,7 +89,8 @@
                             @click="editSelectedAddress"
                             :dark="false"
                             :disabled="!selectedAddress"
-                        >Edit Address</vue-button>
+                            >Edit Address</vue-button
+                        >
                     </div>
                 </div>
             </div>
@@ -171,11 +175,7 @@
                     </div>
                 </vue-form>
             </vue-modal>
-            <vue-modal
-                v-model="showEditAddressModal"
-                width="500px"
-                :title="'Edit ' + editAddress.nickname"
-            >
+            <vue-modal v-model="showEditAddressModal" width="500px" :title="'Edit ' + editAddress.nickname">
                 <vue-form v-model:isValid="editAddress.isValid" @submit="doEditAddress">
                     <vue-input-text
                         name="nickname"
@@ -263,16 +263,12 @@
                 <p>This action cannot be undone.</p>
                 <template #actions>
                     <div class="d-flex justify-content-between w-100 mb-2">
-                        <vue-button
-                            tile
-                            :background="colours.secondary"
-                            @click="showConfirmDeleteModal = false"
-                        >Cancel</vue-button>
-                        <vue-button
-                            tile
-                            :background="colours.primary"
-                            @click="doDeleteAddress"
-                        >Delete Address</vue-button>
+                        <vue-button tile :background="colours.secondary" @click="showConfirmDeleteModal = false"
+                            >Cancel</vue-button
+                        >
+                        <vue-button tile :background="colours.primary" @click="doDeleteAddress"
+                            >Delete Address</vue-button
+                        >
                     </div>
                 </template>
             </vue-modal>
@@ -283,16 +279,16 @@
 <script setup>
 /* *********************************************************
  * MODULE IMPORTS
-********************************************************* */
+ ********************************************************* */
 import { ref, computed, inject } from "vue";
 import { useSnackbar } from "@dsmdesign/vue3-snackbar";
 import Listbox from "@dsmdesign/vue3-input-listbox";
 
 /* *********************************************************
  * LOCAL IMPORTS
-********************************************************* */
+ ********************************************************* */
 import { api } from "@/js/plugins/axios";
-import { useForm } from "@/js/helpers/form";
+import { useForm } from "@dsmdesign/vue3-helpers";
 
 const snackbar = useSnackbar();
 const colours = inject("colours");
@@ -300,46 +296,50 @@ const routes = inject("routes");
 
 /* *********************************************************
  * ADDRESS SELECTION
-********************************************************* */
+ ********************************************************* */
 const addresses = ref([]);
 const selectedAddress = ref(null);
 
 const selectedAddressObject = computed(() => {
-    return addresses.value.find(address => {
-        return address.id === selectedAddress.value
-    })
-})
+    return addresses.value.find((address) => {
+        return address.id === selectedAddress.value;
+    });
+});
 
-const addressOptions = computed(() => addresses.value.map(address => {
-    return {
-        label: address.nickname || address.address,
-        value: address.id
-    }
-}))
+const addressOptions = computed(() =>
+    addresses.value.map((address) => {
+        return {
+            label: address.nickname || address.address,
+            value: address.id,
+        };
+    })
+);
 
 /* *********************************************************
  * CREATE ADDRESS
-********************************************************* */
+ ********************************************************* */
 const showNewAddressModal = ref(false);
 
 const newAddress = useForm({
-    url: routes.address, method: 'POST', fields: {
-        account_id: '',
+    url: routes.address,
+    method: "POST",
+    fields: {
+        account_id: "",
         country_id: 222,
-        nickname: '',
-        company: '',
-        address: '',
-        address_2: '',
-        town: '',
-        county: '',
-        postcode: '',
-        phone: ''
-    }
+        nickname: "",
+        company: "",
+        address: "",
+        address_2: "",
+        town: "",
+        county: "",
+        postcode: "",
+        phone: "",
+    },
 });
 
 const createNewAddress = () => {
     showNewAddressModal.value = true;
-}
+};
 
 const doCreateAddress = async () => {
     try {
@@ -349,21 +349,19 @@ const doCreateAddress = async () => {
         }
 
         snackbar.add({
-            type: 'success',
-            text: `The address "${newAddress.nickname || newAddress.address}" has been created`
-        })
-    }
-    catch (e) {
+            type: "success",
+            text: `The address "${newAddress.nickname || newAddress.address}" has been created`,
+        });
+    } catch (e) {
         console.log(e);
-    }
-    finally {
+    } finally {
         showNewAddressModal.value = false;
     }
-}
+};
 
 /* *********************************************************
  * EDIT ADDRESS
-********************************************************* */
+ ********************************************************* */
 const showEditAddressModal = ref(false);
 
 const editSelectedAddress = () => {
@@ -372,107 +370,105 @@ const editSelectedAddress = () => {
     }
     showEditAddressModal.value = true;
 
-    ['nickname', 'company', 'address', 'address_2', 'town', 'county', 'postcode', 'phone'].forEach(field => {
+    ["nickname", "company", "address", "address_2", "town", "county", "postcode", "phone"].forEach((field) => {
         editAddress[field] = selectedAddressObject.value[field];
     });
 
     editAddress.address_id = selectedAddressObject.value.id;
-
-}
+};
 
 const editAddress = useForm({
-    url: routes.address, method: 'PATCH', fields: {
-        account_id: '',
+    url: routes.address,
+    method: "PATCH",
+    fields: {
+        account_id: "",
         address_id: null,
         country_id: 222,
-        nickname: '',
-        company: '',
-        address: '',
-        address_2: '',
-        town: '',
-        county: '',
-        postcode: '',
-        phone: ''
-    }
+        nickname: "",
+        company: "",
+        address: "",
+        address_2: "",
+        town: "",
+        county: "",
+        postcode: "",
+        phone: "",
+    },
 });
 
 const doEditAddress = async () => {
     try {
         const result = await editAddress.submit();
         if (result.data.address && result.data.address.id) {
-            const existingIndex = addresses.value.findIndex(address => address.id === editAddress.address_id);
+            const existingIndex = addresses.value.findIndex((address) => address.id === editAddress.address_id);
             addresses.value.splice(existingIndex, 1, result.data.address);
         }
         selectedAddress.value = null;
 
         snackbar.add({
-            type: 'success',
-            text: `The address "${editAddress.nickname || editAddress.address}" has been edited`
-        })
-    }
-    catch (e) {
+            type: "success",
+            text: `The address "${editAddress.nickname || editAddress.address}" has been edited`,
+        });
+    } catch (e) {
         console.log(e);
-    }
-    finally {
+    } finally {
         showEditAddressModal.value = false;
     }
-}
+};
 
 /* *********************************************************
  * DELETE ADDRESS
-********************************************************* */
+ ********************************************************* */
 const showConfirmDeleteModal = ref(false);
 
 const doDeleteAddress = () => {
     api.delete(routes.address, {
         data: {
-            address_id: selectedAddressObject.value.id
-        }
+            address_id: selectedAddressObject.value.id,
+        },
     })
         .then((res) => {
-            if (res.data.status === 'success') {
-                addresses.value = addresses.value.filter(address => {
+            if (res.data.status === "success") {
+                addresses.value = addresses.value.filter((address) => {
                     return address.id !== selectedAddressObject.value.id;
-                })
+                });
                 selectedAddress.value = null;
 
                 snackbar.add({
-                    type: 'success',
-                    text: `Address deleted successfully`
-                })
+                    type: "success",
+                    text: `Address deleted successfully`,
+                });
             }
         })
         .finally(() => {
             showConfirmDeleteModal.value = false;
-        })
-}
+        });
+};
 
 /* *********************************************************
  * FETCH USER ACCOUNTS / ADDRESSES
-********************************************************* */
+ ********************************************************* */
 api.get(routes.accounts)
-    .then(res => {
+    .then((res) => {
         const id = res.data?.[0]?.id;
         newAddress.account_id = editAddress.account_id = id;
 
         if (id) {
-            return api.get(routes.addresses.replace('##account##', id));
-        }
-        else throw new Error();
+            return api.get(routes.addresses.replace("##account##", id));
+        } else throw new Error();
     })
-    .then(res => {
+    .then((res) => {
         addresses.value = res?.data || [];
         if (addresses.value.length === 0) throw new Error();
         else {
             selectedAddress.value = addressOptions.value[0].value;
         }
     })
-    .catch(e => {
+    .catch((e) => {
         snackbar.add({
-            type: 'error',
-            text: 'There was a problem fetching your addresses. Please try again later.'
-        })
-    })
+            type: "error",
+            text: "There was a problem fetching your addresses. Please try again later.",
+        });
+    });
 </script>
 
 <style lang="scss" scoped>

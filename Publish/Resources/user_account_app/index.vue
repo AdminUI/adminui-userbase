@@ -42,6 +42,10 @@ const props = defineProps({
         type: String,
         default: "darkgray",
     },
+    reviewsEnabled: {
+        type: String,
+        default: "0",
+    },
 });
 
 provide("routes", props.routes);
@@ -103,6 +107,7 @@ const sidebarOptions = computed(() => {
     routes
         .filter((r) => r.meta.menu !== false)
         .forEach((r) => {
+            if (r.name === "reviews" && props.reviewsEnabled !== "1") return true;
             // Add the route to the menu
             options.push({
                 id: index,
@@ -155,8 +160,7 @@ const sidebarOptions = computed(() => {
             font-weight: bold;
 
             i {
-                filter: invert(32%) sepia(82%) saturate(7486%)
-                    hue-rotate(356deg) brightness(91%) contrast(96%);
+                filter: invert(32%) sepia(82%) saturate(7486%) hue-rotate(356deg) brightness(91%) contrast(96%);
             }
         }
 
