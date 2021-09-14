@@ -4,12 +4,11 @@
 
 <ul class="{{ $class ?? '' }} account-menu">
     @auth
-        <li><a href="/user/account/details">Account Details</a></li>
+        <li><a href="/user/account/account-details" class="underline">Account Details</a></li>
         <li><a href="/user/account/addresses" class="underline">My Addresses</a></li>
         <li><a href="/user/account" class="underline">My Notifications</a></li>
         <li><a href="/user/account/wishlist" class="underline">Wishlist</a></li>
-        <li><a href="/user/account/history" class="underline">Order History</a></li>
-        <li><a href="/user/account/returns" class="underline">Returns</a></li>
+        <li><a href="/user/account/order-history" class="underline">Order History</a></li>
         <li><a href="/user/account/returns" class="underline">Returns</a></li>
         <li><a href="/user/account/logout" class="underline">Logout</a></li>
     @else

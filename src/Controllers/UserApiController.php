@@ -510,5 +510,28 @@ class UserApiController extends Controller
         ]);
     }
 
+    // ❤️‍🔥❤️‍🔥❤️‍🔥❤️‍🔥❤️‍🔥❤️‍🔥❤️‍🔥❤️‍🔥❤️‍🔥❤️‍🔥❤️‍🔥❤️‍🔥 MINI RETURN TRACKER ❤️‍🔥❤️‍🔥❤️‍🔥❤️‍🔥❤️‍🔥❤️‍🔥❤️‍🔥❤️‍🔥❤️‍🔥❤️‍🔥❤️‍🔥❤️‍🔥❤️‍🔥❤️‍🔥❤️‍🔥
+
+    /**
+     * Send the user return contact form
+     *
+     * @param Request $request
+     *
+     * @return [type]
+     */
+    public function sendReturn(Request $request)
+    {
+        $request->validate([
+            'product_name'    => 'required|string',
+            'reason'          => 'required|string',
+            'comment'           => 'nullable|string'
+        ]);
+
+        // Return a success message
+        return json_encode([
+            'status'    => 'success',
+        ]);
+    }
+
     // USER END  🧑🏽‍🦱🧑🏽‍🦱🧑🏽‍🦱🧑🏽‍🦱🧑🏽‍🦱🧑🏽‍🦱
 }

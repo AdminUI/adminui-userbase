@@ -105,6 +105,10 @@ Route::group([
     Route::patch('/user/api/review', [UserApiController::class, 'updateReview'])
         ->name('user.api.review');
 
+    // RETURNS
+    Route::post('/user/api/returns', [UserApiController::class, 'sendReturn'])
+        ->name('user.api.returns');
+
     // Send notificaton test
     Route::any('/user/send/notification', [UserApiController::class, 'sendTestNotification'])
         ->name('user.send.notification');
