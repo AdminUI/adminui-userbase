@@ -17,7 +17,7 @@ Route::group([
 
 // Need Auth Routes
 Route::group([
-    'middleware' => ['web', 'auth', 'verified']
+    'middleware' => ['web', 'auth']
 ], function () {
     // User Logout
     Route::post('/user/account/logout', [LoginController::class, 'logout'])->name('user.api.logout');
