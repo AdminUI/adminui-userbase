@@ -17,10 +17,12 @@ $routes = [
 ];
 @endphp
 
+
 {{-- Render the vue js mini app --}}
 <x-ecom.layout.main>
     <vue-user-account-app :routes=@json($routes) site-name="{{ config('app.name') }}"
-        reviews-enabled="{{ config('settings.has_reviews') }}" primary="var(--primary)" secondary="var(--secondary)">
+        reviews-enabled="{{ config('settings.has_reviews') }}" primary="var(--primary)" secondary="var(--secondary)"
+        class="dynamic-container">
         <div class="dynamic-container" style="height: min(450px, 50vh)">
             <div class="row no-gutters h-100">
                 <div class="col-3 pr-2">
@@ -37,5 +39,11 @@ $routes = [
                 </div>
             </div>
         </div>
+        <template #register.header>
+            <vue-message severity="info" :closable="false">
+                If you wish to have a Trade Account please apply via the
+                <a href="/trade-accounts" class="underline">Trade Accounts</a> page
+            </vue-message>
+        </template>
     </vue-user-account-app>
 </x-ecom.layout.main>
