@@ -21,7 +21,6 @@ class ProductResourceWishList extends JsonResource
         // if (Auth()->check()) {
         //     $wishListed  = empty(Auth()->user()->wishlist->where('product_id', $this->id)->first()) ? false : true;
         // }
-
         return [
             "id"            => $this->id,
             "name"          => $this->name,
@@ -33,10 +32,7 @@ class ProductResourceWishList extends JsonResource
             "media"      => $this->mediaLink(),
             "categories" => $this->category(),
             //'media'         => MediaResource::collection($this->media),
-            'brand'         => [
-                'name' => $this->brand->name,
-                'slug' => $this->brand->slug,
-            ],
+            'brand'         => parent::toArray($this->brand),
             'description'   => [
                 'short_description' => $this->description->short_description
             ]
