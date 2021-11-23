@@ -2,10 +2,7 @@
 
 namespace AdminUI\AdminUIUserBase\Resources;
 
-use App\Helper\LiveProduct;
 use Illuminate\Http\Resources\Json\JsonResource;
-use AdminUI\AdminUIAdmin\Resources\MediaResource;
-use AdminUI\AdminUIEcommerce\Resources\BrandResource;
 use AdminUI\AdminUIUserBase\Resources\OrderLineResource;
 
 class OrderResource extends JsonResource
