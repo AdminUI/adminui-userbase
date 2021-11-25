@@ -4,7 +4,7 @@ namespace AdminUI\AdminUIUserBase\Controllers;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-use AdminUI\AdminUIAdmin\Models\Country;
+use AdminUI\AdminUI\Models\Country;
 
 class UserController extends Controller
 {

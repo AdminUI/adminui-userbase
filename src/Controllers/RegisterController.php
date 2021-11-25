@@ -7,11 +7,11 @@ use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Auth\Events\Registered;
-use AdminUI\AdminUIAccounts\Models\User;
-use AdminUI\AdminUIAccounts\Helpers\UserHelper;
+use AdminUI\AdminUI\Models\User;
+use AdminUI\AdminUI\Helpers\UserHelper;
 use Illuminate\Validation\Rules\Password;
-use AdminUI\AdminUIAccounts\Models\Account;
-use AdminUI\AdminUIAccounts\Models\Address;
+use AdminUI\AdminUI\Models\Account;
+use AdminUI\AdminUI\Models\Address;
 
 class RegisterController extends Controller
 {

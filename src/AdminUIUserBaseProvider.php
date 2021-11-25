@@ -2,10 +2,10 @@
 
 namespace AdminUI\AdminUIUserBase;
 
-use AdminUI\AdminUIFramework\Provider;
+use Illuminate\Support\ServiceProvider;
 use AdminUI\AdminUIUserBase\Commands\Republish;
 
-class AdminUIUserBaseProvider extends Provider
+class AdminUIUserBaseProvider extends ServiceProvider
 {
     public $viewPrefix = 'auiuserbase';
     public $dir        = __DIR__;
@@ -16,13 +16,14 @@ class AdminUIUserBaseProvider extends Provider
      *
      * @return void
      */
-    public function _boot()
+    public function boot()
     {
         // // Load user_base views
-        // $this->loadViewsFrom(__DIR__ . '/views', 'userbase');
+        $this->loadViewsFrom(__DIR__ . '/views', 'auiuserbase');
 
         // // Load user_base routes
-        // $this->loadRoutesFrom(__DIR__ . '/Routes/web.php');
+        $this->loadRoutesFrom(__DIR__ . '/Routes/web.php');
+        $this->loadRoutesFrom(__DIR__ . '/Routes/api.php');
 
         // Load Commands
         if ($this->app->runningInConsole()) {

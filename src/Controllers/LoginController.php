@@ -7,7 +7,7 @@ use Illuminate\Support\Carbon;
 use App\Http\Controllers\Controller;
 use Illuminate\Auth\Events\Verified;
 use Illuminate\Support\Facades\Auth;
-use AdminUI\AdminUIAccounts\Models\User;
+use AdminUI\AdminUI\Models\User;
 use Illuminate\Auth\Events\Registered;
 use Illuminate\Support\Facades\Redirect;
 
