@@ -81,7 +81,7 @@ class LoginController extends Controller
         }
 
         // Return to the the login page as success
-        return redirect('/user/account/email-verified')->with('success', 'User verify with success!');
+        return Redirect::route('login')->with('success', 'User verify with success!');
     }
 
     public function needVerify()
