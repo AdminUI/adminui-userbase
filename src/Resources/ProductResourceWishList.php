@@ -27,7 +27,7 @@ class ProductResourceWishList extends JsonResource
             "slug"          => $this->slug,
             "sku_code"      => $this->sku_code,
             // "is_wishlisted" => $wishListed,
-            "link"       => route('view.product', $this->slug),
+            "link"       => $this->mediaLink(),
             "live_data"  => LiveProduct::getLiveData($this),
             "media"      => $this->mediaLink(),
             "categories" => $this->category(),
