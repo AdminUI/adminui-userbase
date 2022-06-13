@@ -12,7 +12,7 @@ use AdminUI\AdminUIUserBase\Controllers\RegisterController;
 Route::group([
     'middleware' => ['web']
 ], function () {
-    Route::get('/user/account/{vue_capture?}', [UserController::class, 'index'])->where('vue_capture', '[\/\w\.-]*')->name('user.account');
+    Route::get('/user/account/{vue_capture?}', [UserController::class, 'index'])->where('vue_capture', '[\/\w\.-]*')->name('userbase.account');
 });
 
 // Need Auth Routes
@@ -20,7 +20,7 @@ Route::group([
     'middleware' => ['web', 'auth']
 ], function () {
     // User Logout
-    Route::post('/user/account/logout', [LoginController::class, 'logout'])->name('user.api.logout');
+    Route::post('/user/account/logout', [LoginController::class, 'logout'])->name('userbase.api.logout');
 });
 
 // Login | Register Route need to be logout to view this page
@@ -30,10 +30,10 @@ Route::group([
     // User Login
     Route::get('/user/login', [LoginController::class, 'index'])->name('login');
     // Do login
-    Route::post('/login/user', [LoginController::class, 'login'])->name('user.login');
+    Route::post('/login/user', [LoginController::class, 'login'])->name('userbase.login');
 
     // User Registration
-    Route::get('/user/register', [RegisterController::class, 'index'])->name('user.register');
+    Route::get('/user/register', [RegisterController::class, 'index'])->name('userbase.register');
     Route::post('/user/register', [RegisterController::class, 'userRegister']);
 
     // Password Reset
@@ -51,7 +51,7 @@ Route::group([
     Route::get('/email/verify', [LoginController::class, 'needVerify'])->name('verification.notice');
 
     // Login to verify the user
-    Route::get('/user/verify/{id}/{time}', [LoginController::class, 'verify'])->name('user.verify');
+    Route::get('/user/verify/{id}/{time}', [LoginController::class, 'verify'])->name('userbase.verify');
 });
 
 /* *********************************************************
@@ -63,55 +63,55 @@ Route::group([
 
     // WISHLIST
     Route::post('/user/api/wishlist', [UserApiController::class, 'getWishList'])
-        ->name('user.api.wishlist');
+        ->name('userbase.api.wishlist');
     Route::patch('/user/api/wishlist/{product}', [UserApiController::class, 'toggleWishList'])
-        ->name('user.api.wishlist');
+        ->name('userbase.api.wishlist');
 
     // ACCOUNTS
     Route::get('/user/api/accounts', [UserApiController::class, 'getAccounts'])
-        ->name('user.api.accounts');
+        ->name('userbase.api.accounts');
 
     // ADDRESSES
     Route::get('/user/api/addresses/{account}', [UserApiController::class, 'getAccountAddresses'])
-        ->name('user.api.addresses');
+        ->name('userbase.api.addresses');
     Route::post('/user/api/address', [UserApiController::class, 'createAccountAddress'])
-        ->name('user.api.address');
+        ->name('userbase.api.address');
     Route::patch('/user/api/address', [UserApiController::class, 'updateAccountAddress']);
     Route::delete('/user/api/address', [UserApiController::class, 'deleteAccountAddress']);
 
     // PROFILE
     Route::patch('/user/api/password', [UserApiController::class, 'userPasswordUpdate'])
-        ->name('user.api.password');
+        ->name('userbase.api.password');
     Route::patch('/user/api/profile', [UserApiController::class, 'userProfileUpdate'])
-        ->name('user.api.profile');
+        ->name('userbase.api.profile');
 
     // ORDERS
     Route::get('/user/api/orders', [UserApiController::class, 'getUserOrders'])
-        ->name('user.api.orders');
+        ->name('userbase.api.orders');
 
     // NOTIFICATIONS
     Route::get('/user/api/notifications', [UserApiController::class, 'userGetNotification'])
-        ->name('user.api.notifications');
+        ->name('userbase.api.notifications');
     Route::patch('/user/api/notifications', [UserApiController::class, 'userReadNotification']);
     Route::delete('/user/api/notifications', [UserApiController::class, 'userDeleteNotification']);
 
     // USER PRODUCTS REVIEW
     Route::get('/user/api/reviews', [UserApiController::class, 'getReviews'])
-        ->name('user.api.reviews');
+        ->name('userbase.api.reviews');
     Route::delete('/user/api/reviews', [UserApiController::class, 'deleteReviews']);
 
     Route::post('/user/api/review/{product_id}', [UserApiController::class, 'addReview'])
-        ->name('user.api.review.add');
+        ->name('userbase.api.review.add');
     Route::patch('/user/api/review', [UserApiController::class, 'updateReview'])
-        ->name('user.api.review');
+        ->name('userbase.api.review');
 
     // RETURNS
     Route::post('/user/api/returns', [UserApiController::class, 'sendReturn'])
-        ->name('user.api.returns');
+        ->name('userbase.api.returns');
 
     // Send notificaton test
     Route::any('/user/send/notification', [UserApiController::class, 'sendTestNotification'])
-        ->name('user.send.notification');
+        ->name('userbase.send.notification');
 });
 
 /* *********************************************************
