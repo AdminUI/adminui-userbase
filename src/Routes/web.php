@@ -65,7 +65,7 @@ Route::group([
     Route::post('/user/api/wishlist', [UserApiController::class, 'getWishList'])
         ->name('userbase.api.wishlist');
     Route::patch('/user/api/wishlist/{product}', [UserApiController::class, 'toggleWishList'])
-        ->name('userbase.api.wishlist');
+        ->name('userbase.api.wishlist.product');
 
     // ACCOUNTS
     Route::get('/user/api/accounts', [UserApiController::class, 'getAccounts'])
