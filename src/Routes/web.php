@@ -28,9 +28,9 @@ Route::group([
     'middleware' => ['web', 'guest']
 ], function () {
     // User Login
-    Route::get('/user/login', [LoginController::class, 'index'])->name('login');
+    Route::get('/user/login', [LoginController::class, 'index'])->name('userbase.login');
     // Do login
-    Route::post('/login/user', [LoginController::class, 'login'])->name('userbase.login');
+    Route::post('/user/login', [LoginController::class, 'login']);
 
     // User Registration
     Route::get('/user/register', [RegisterController::class, 'index'])->name('userbase.register');
